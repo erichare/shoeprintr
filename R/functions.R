@@ -259,6 +259,10 @@ boosted_clique <- function(circle_in, circle_ref, ncross_in_bins = 30, xbins_in 
         final_ks <- do.call(c,parLapply(cl, dist_l_grid_core_assign,function(x,eps,la,lb) {gc();apply(x,1,get_edge_vertice,eps=eps,la=la,lb=lb)},eps=eps,la=la,lb=lb))
     ## Mac/Linux
     } else {
+      save(dist_l_grid_core_assign, file = file.path(tempdir(), "test.RData"))
+      save(eps, file = file.path(tempdir(), "eps.RData"))
+      save(la, file = file.path(tempdir(), "la.RData"))
+      save(lb, file = file.path(tempdir(), "lb.RData"))
         final_ks <- do.call(c,mclapply(dist_l_grid_core_assign,function(x,eps,la,lb) {gc();apply(x,1,get_edge_vertice,eps=eps,la=la,lb=lb)},eps=eps,la=la,lb=lb,mc.cores=num_cores))
     }
 
